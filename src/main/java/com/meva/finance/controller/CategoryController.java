@@ -24,7 +24,7 @@ public class CategoryController {
         return ResponseEntity.ok(categoryService.listCategory());
     }
 
-    @GetMapping("/getId")
+    @PostMapping("/getId")
     public ResponseEntity<Long> getId(@RequestBody DescriptionDto dto) throws ValidException {
         return ResponseEntity.ok(categoryService.getId(dto));
     }

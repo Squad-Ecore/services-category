@@ -24,10 +24,6 @@ public class CategoryService {
         return categoryRepository.findAll();
     }
 
-    private void validDto(DescriptionDto dto) throws ValidException {
-        if ((dto.getDescription().isEmpty()) || dto.getDescription().length() < 3)
-            throw new ValidException("Descrição insuficiente para pesquisa.");
-    }
 
     public Long getId(DescriptionDto dto) throws ValidException{
         validDto(dto);
@@ -36,5 +32,10 @@ public class CategoryService {
         AtomicLong id = new AtomicLong(6L);
         palavras.forEach(p -> subCategoryRepository.findByDescription(p).ifPresent(sub -> id.set(sub.getCategory().getId())));
         return id.get();
+    }
+
+    private void validDto(DescriptionDto dto) throws ValidException {
+        if ((dto.getDescription().isEmpty()) || dto.getDescription().length() < 3)
+            throw new ValidException("Descrição insuficiente para pesquisa.");
     }
 }
